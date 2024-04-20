@@ -1,0 +1,37 @@
+{
+  "name": "atp-apaas-utils",
+  "version": "1.0.0",
+  "description": "a utils pack for byted apaas platform",
+  "main": "./dist/index.mjs",
+  "module": "./dist/index.mjs",
+  "scripts": {
+    "build": "tsup src/index.ts",
+    "start": "npm run build -- --watch",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/YangAi/atp-apaas-utils.git"
+  },
+  "author": "Yang Ai",
+  "license": "ISC",
+  "exports": {
+    "require": "./dist/index.cjs",
+    "import": "./dist/index.mjs",
+    "node": "./dist/index.cjs",
+    "default": "./dist/index.cjs"
+  },
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/YangAi/atp-apaas-utils/issues"
+  },
+  "homepage": "https://github.com/YangAi/atp-apaas-utils#readme",
+  "publishConfig": {
+    "access": "public"
+  },
+  "devDependencies": {
+    "@types/node": "^20.12.7",
+    "tsup": "^8.0.2",
+    "typescript": "^5.4.5"
+  }
+}
