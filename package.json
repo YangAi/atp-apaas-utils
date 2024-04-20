@@ -1,6 +1,6 @@
 {
   "name": "atp-apaas-utils",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "a utils pack for byted apaas platform",
   "main": "./dist/index.mjs",
   "module": "./dist/index.mjs",
