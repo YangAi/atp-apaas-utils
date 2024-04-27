@@ -137,18 +137,16 @@ var oql_default = {
 };
 
 // src/index.ts
-var src_default = {
-  _: __spreadProps(__spreadValues({}, _), {
-    sleep: (ms) => new Promise((resolve) => setTimeout(resolve, ms))
-  }),
-  createModel: model_default,
-  createEntry,
-  FnService: FnService2,
-  lark: lark_default,
-  exceptions,
-  oql: oql_default
-};
+var extendedLodash = __spreadProps(__spreadValues({}, _), {
+  sleep: (ms) => new Promise((resolve) => setTimeout(resolve, ms))
+});
 export {
-  src_default as default
+  FnService2 as FnService,
+  extendedLodash as _,
+  createEntry,
+  model_default as createModel,
+  exceptions,
+  lark_default as lark,
+  oql_default as oql
 };
 //# sourceMappingURL=index.js.map

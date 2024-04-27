@@ -5,17 +5,17 @@ import exceptions from '@byted-apaas/server-common-node/utils/exceptions';
 import client from './lark';
 import oql from './oql';
 
+const extendedLodash = {
+  ..._,
+  sleep: (ms: number) => new Promise((resolve) => setTimeout(resolve, ms)),
+};
 
-
-export default {
-  _: {
-    ..._,
-    sleep: (ms: number) => new Promise((resolve) => setTimeout(resolve, ms)),
-  },
-  createModel: createModelService,
+export {
+  extendedLodash as _,
+  createModelService as createModel,
   createEntry,
   FnService,
-  lark: client,
+  client as lark,
   exceptions,
   oql
 }
