@@ -40,7 +40,7 @@ class ModelService<T extends ObjectApiNames> extends BaseModelService<T> {
 }
 
 const createModelService = <T extends ObjectApiNames>(
-  model: T
+  model: ObjectApiNames
 ): ModelService<T> => new ModelService<T>(model);
 
 export default createModelService;

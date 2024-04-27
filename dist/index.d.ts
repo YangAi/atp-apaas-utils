@@ -20,7 +20,7 @@ declare class ModelService<T extends ObjectApiNames> extends BaseModelService<T>
         desc?: boolean;
     }): Promise<ResultData<T, U>[]>;
 }
-declare const createModelService: <T extends any>(model: T) => ModelService<T>;
+declare const createModelService: <T extends any>(model: any) => ModelService<T>;
 
 declare let client: any;
 
