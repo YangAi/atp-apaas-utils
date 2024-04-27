@@ -20,7 +20,7 @@ class ModelService<T extends ObjectApiNames> extends BaseModelService<T> {
       desc = false,
     }: {
       filter?: FilterCond<T>,
-      select?: U[],
+      select: U[],
       sort?: U[],
       desc?: boolean,
     }

@@ -138,44 +138,45 @@ if (appId && appSecret) {
 }
 var lark_default = client;
 
-// src/index.ts
+// src/oql/index.ts
 var import_server_common_node = require("@byted-apaas/server-common-node");
 var logger = new import_server_common_node.Logger();
+var oql_default = {
+  selectAll: (query) => __async(void 0, null, function* () {
+    if (!query.toUpperCase().includes("ORDER")) {
+      logger.warn("\u8FD9\u4E2A SQL \u6CA1\u6709\u5305\u542B ORDER BY\uFF0C\u6570\u636E\u91CF\u5927\u7684\u65F6\u5019\u53EF\u80FD\u6709\u95EE\u9898");
+    }
+    logger.log(query);
+    const pageSize = 200;
+    let page = 1;
+    let result = [];
+    while (true) {
+      const offset = (page - 1) * pageSize;
+      const finalQuery = `
+        ${query} 
+        LIMIT ${pageSize} OFFSET ${offset}
+      `;
+      const data = yield application.data.oql(finalQuery).execute();
+      if (data.length === 0) {
+        break;
+      }
+      result = result.concat(data);
+      page++;
+    }
+    return result;
+  })
+};
+
+// src/index.ts
 var src_default = {
   _: __spreadProps(__spreadValues({}, import_lodash.default), {
     sleep: (ms) => new Promise((resolve) => setTimeout(resolve, ms))
   }),
-  createModelService: model_default,
+  model: model_default,
   createEntry: import_byted_apaas_utils2.createEntry,
   FnService: import_byted_apaas_utils2.FnService,
   lark: lark_default,
   exceptions: import_exceptions.default,
-  oql: {
-    selectAll: (query) => __async(void 0, null, function* () {
-      if (!query.toUpperCase().includes("ORDER")) {
-        logger.warn("\u8FD9\u4E2A SQL \u6CA1\u6709\u5305\u542B ORDER BY\uFF0C\u6570\u636E\u91CF\u5927\u7684\u65F6\u5019\u53EF\u80FD\u6709\u95EE\u9898");
-      }
-      logger.log(query);
-      const pageSize = 200;
-      let page = 1;
-      let result = [];
-      while (true) {
-        const offset = (page - 1) * pageSize;
-        const finalQuery = `
-        ${query} 
-        LIMIT ${pageSize} OFFSET ${offset}
-      `;
-        const data = yield application.data.oql(finalQuery).execute();
-        if (data.length === 0) {
-          break;
-        }
-        result = result.concat(data);
-        page++;
-      }
-      return result;
-    })
-  }
-  // oqlService,
-  //
+  oql: oql_default
 };
 //# sourceMappingURL=index.cjs.map

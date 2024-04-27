@@ -634,10 +634,10 @@ declare const _default: {
         toPath(value: any): string[];
         uniqueId(prefix?: string | undefined): string;
     };
-    createModelService: <T extends any>(model: T) => {
+    model: <T extends any>(model: T) => {
         find<U extends string | number | symbol>({ filter, select, sort, desc, }: {
             filter?: any;
-            select?: U[] | undefined;
+            select: U[];
             sort?: U[] | undefined;
             desc?: boolean | undefined;
         }): Promise<byted_apaas_utils.ResultData<T, U>[]>;
