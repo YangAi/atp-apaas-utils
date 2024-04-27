@@ -1,4 +1,4 @@
-import lark from '@larksuiteoapi/node-sdk';
+import * as lark from '@larksuiteoapi/node-sdk';
 
 // @ts-ignore
 const client = new lark.Client({
