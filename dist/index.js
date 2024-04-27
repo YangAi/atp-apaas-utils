@@ -42,7 +42,9 @@ var __async = (__this, __arguments, generator) => {
 import _ from "lodash";
 
 // src/model/index.ts
-import { BaseModelService } from "byted-apaas-utils";
+import {
+  BaseModelService
+} from "byted-apaas-utils";
 var ModelService = class extends BaseModelService {
   constructor(model) {
     super({ model });
@@ -72,6 +74,24 @@ var ModelService = class extends BaseModelService {
           returnData.push(...records);
         }
       }).then(() => returnData);
+    });
+  }
+  /**
+   * 批量创建记录
+   * @param recordMapList 多条用于创建的记录数据组成的数组
+   * @paramExample `[{_name: 'John', age: 19, gender: 'male'}, {_name: 'Alis', age: 16, gender: 'female'}]`
+   */
+  batchCreate(recordMapList) {
+    return __async(this, null, function* () {
+      let updateList = [];
+      const result = [];
+      for (let i = 0; i < recordMapList.length; ) {
+        updateList = recordMapList.slice(i, i + 500);
+        const res = yield this.model.batchCreate(updateList);
+        result.push(res);
+        i += 500;
+      }
+      return result;
     });
   }
 };

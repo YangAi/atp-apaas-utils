@@ -1,4 +1,12 @@
-import {FnService, BaseModelService, ObjectApiNames, SelectCond, FilterCond, ResultData} from "byted-apaas-utils";
+import {
+  FnService,
+  BaseModelService,
+  ObjectApiNames,
+  SelectCond,
+  FilterCond,
+  ResultData,
+  CreateRecordMap
+} from "byted-apaas-utils";
 
 class ModelService<T extends ObjectApiNames> extends BaseModelService<T> {
   constructor(model: T) {
@@ -37,6 +45,26 @@ class ModelService<T extends ObjectApiNames> extends BaseModelService<T> {
       },
     }).then(() => returnData);
   }
+
+  /**
+   * 批量创建记录
+   * @param recordMapList 多条用于创建的记录数据组成的数组
+   * @paramExample `[{_name: 'John', age: 19, gender: 'male'}, {_name: 'Alis', age: 16, gender: 'female'}]`
+   */
+  async batchCreate(recordMapList: CreateRecordMap<T>[]) {
+    // if (!recordMapList.every(item => item._id)) throw Error('_id is required');
+
+    let updateList = [];
+    const result = [];
+    for (let i = 0; i < recordMapList.length; ) {
+      updateList = recordMapList.slice(i, i + 500);
+      const res = await this.model.batchCreate(updateList);
+      result.push(res);
+      i += 500;
+    }
+    return result;
+  }
+
 }
 
 const createModelService = <T extends ObjectApiNames>(

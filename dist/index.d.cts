@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { ObjectApiNames, BaseModelService, SelectCond, FilterCond, ResultData } from 'byted-apaas-utils';
+import { ObjectApiNames, BaseModelService, SelectCond, FilterCond, ResultData, CreateRecordMap } from 'byted-apaas-utils';
 export { FnService, createEntry } from 'byted-apaas-utils';
 export { default as exceptions } from '@byted-apaas/server-common-node/utils/exceptions';
 
@@ -19,6 +19,12 @@ declare class ModelService<T extends ObjectApiNames> extends BaseModelService<T>
         sort?: U[];
         desc?: boolean;
     }): Promise<ResultData<T, U>[]>;
+    /**
+     * 批量创建记录
+     * @param recordMapList 多条用于创建的记录数据组成的数组
+     * @paramExample `[{_name: 'John', age: 19, gender: 'male'}, {_name: 'Alis', age: 16, gender: 'female'}]`
+     */
+    batchCreate(recordMapList: CreateRecordMap<T>[]): Promise<number[][]>;
 }
 declare const createModelService: <T extends any>(model: any) => ModelService<T>;
 

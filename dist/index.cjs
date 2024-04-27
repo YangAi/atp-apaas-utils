@@ -111,6 +111,24 @@ var ModelService = class extends import_byted_apaas_utils.BaseModelService {
       }).then(() => returnData);
     });
   }
+  /**
+   * 批量创建记录
+   * @param recordMapList 多条用于创建的记录数据组成的数组
+   * @paramExample `[{_name: 'John', age: 19, gender: 'male'}, {_name: 'Alis', age: 16, gender: 'female'}]`
+   */
+  batchCreate(recordMapList) {
+    return __async(this, null, function* () {
+      let updateList = [];
+      const result = [];
+      for (let i = 0; i < recordMapList.length; ) {
+        updateList = recordMapList.slice(i, i + 500);
+        const res = yield this.model.batchCreate(updateList);
+        result.push(res);
+        i += 500;
+      }
+      return result;
+    });
+  }
 };
 var createModelService = (model) => new ModelService(model);
 var model_default = createModelService;
