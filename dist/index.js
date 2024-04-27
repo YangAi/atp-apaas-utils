@@ -137,18 +137,15 @@ var oql_default = {
 };
 
 // src/index.ts
-var src_default = {
+module.exports = {
   _: __spreadProps(__spreadValues({}, _), {
     sleep: (ms) => new Promise((resolve) => setTimeout(resolve, ms))
   }),
-  model: model_default,
+  createModel: model_default,
   createEntry,
   FnService: FnService2,
   lark: lark_default,
   exceptions,
   oql: oql_default
-};
-export {
-  src_default as default
 };
 //# sourceMappingURL=index.js.map

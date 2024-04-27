@@ -7,12 +7,12 @@ import oql from './oql';
 
 
 
-export default {
+module.exports = {
   _: {
     ..._,
     sleep: (ms: number) => new Promise((resolve) => setTimeout(resolve, ms)),
   },
-  model: createModelService,
+  createModel: createModelService,
   createEntry,
   FnService,
   lark: client,
