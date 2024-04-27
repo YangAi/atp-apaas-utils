@@ -7,7 +7,7 @@ import oql from './oql';
 
 
 
-module.exports = {
+export default {
   _: {
     ..._,
     sleep: (ms: number) => new Promise((resolve) => setTimeout(resolve, ms)),
