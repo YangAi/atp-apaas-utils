@@ -84,12 +84,27 @@ import exceptions from "@byted-apaas/server-common-node/utils/exceptions";
 
 // src/lark/index.ts
 import * as lark from "@larksuiteoapi/node-sdk";
-var client = new lark.Client({
-  // @ts-ignore
-  appId: application.globalVar.getVar("appId"),
-  // @ts-ignore
-  appSecret: application.globalVar.getVar("appSecret")
-});
+var appId = null;
+var appSecret = null;
+try {
+  appId = application.globalVar.getVar("feishuAppId");
+} catch (error) {
+  console.error("Error when getting appId from global variables:", error);
+}
+try {
+  appSecret = application.globalVar.getVar("feishuAppSecret");
+} catch (error) {
+  console.error("Error when getting appSecret from global variables:", error);
+}
+var client = {};
+if (appId && appSecret) {
+  client = new lark.Client({
+    // @ts-ignore
+    appId,
+    // @ts-ignore
+    appSecret
+  });
+}
 var lark_default = client;
 
 // src/index.ts

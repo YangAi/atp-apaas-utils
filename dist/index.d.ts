@@ -1,4 +1,3 @@
-import * as _larksuiteoapi_node_sdk from '@larksuiteoapi/node-sdk';
 import * as _byted_apaas_server_sdk_node_types_types from '@byted-apaas/server-sdk-node/types/types';
 import * as _byted_apaas_server_sdk_node_common_structs from '@byted-apaas/server-sdk-node/common/structs';
 import * as _byted_apaas_server_sdk_node_context_db_impl_IObject from '@byted-apaas/server-sdk-node/context/db/impl/IObject';
@@ -684,7 +683,7 @@ declare const _default: {
     };
     createEntry: <T_2 extends FnService>(mainConstructor: new () => T_2) => (params: Params, context: Context, logger: Logger) => Promise<ReturnType<T_2["run"]>>;
     FnService: typeof FnService;
-    lark: _larksuiteoapi_node_sdk.Client;
+    lark: any;
     exceptions: typeof exceptions;
     oql: {
         selectAll: (query: string) => Promise<any[]>;
