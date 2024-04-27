@@ -1,6 +1,6 @@
 {
   "name": "atp-apaas-utils",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "a utils pack for byted apaas platform",
   "main": "./dist/index.mjs",
   "module": "./dist/index.mjs",
@@ -30,8 +30,20 @@
     "access": "public"
   },
   "devDependencies": {
+    "@types/lodash": "^4.17.0",
     "@types/node": "^20.12.7",
     "tsup": "^8.0.2",
     "typescript": "^5.4.5"
+  },
+  "dependencies": {
+    "@larksuiteoapi/node-sdk": "^1.28.0",
+    "byted-apaas-utils": "^0.0.32",
+    "lodash": "^4.17.21"
+  },
+  "peerDependencies": {
+    "@byted-apaas/baas-sdk-node": "*",
+    "@byted-apaas/faas-sdk-node": "*",
+    "@byted-apaas/server-common-node": "*",
+    "@byted-apaas/server-sdk-node": "*"
   }
 }
