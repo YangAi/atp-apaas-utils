@@ -34,7 +34,7 @@ class ModelService<T extends ObjectApiNames> extends BaseModelService<T> {
     }
   ) {
     const returnData: ResultData<T, U>[] = [];
-
+    console.log('使用新的 Find 函数')
     return this.findStream({
       filter,
       select,
