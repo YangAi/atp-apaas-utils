@@ -65,6 +65,41 @@ class ModelService<T extends ObjectApiNames> extends BaseModelService<T> {
     return result;
   }
 
+  
+  /**
+   * 删除符合条件的所有记录
+   * @param filter 筛选条件
+   */
+  async deleteMany(filter: FilterCond<T>) {
+    const targetList = await this.find({
+      filter, 
+      select: ["_id"],
+    });
+
+    return this.batchDelete(targetList.map((item) => (item as any)._id));
+  }
+
+    /**
+   * 根据筛选条件更新多条记录
+   * @param filter 筛选条件
+   * @param updateData 用于更新的新数据
+   */
+  async updateMany(filter: FilterCond<T>, updateData: UpdateRecordMap<T>) {
+    // @ts-ignore
+    const recordList = await this.find({
+      filter, 
+      select: ["_id"],
+    });
+
+    return this.batchUpdate(
+      recordList.map((item) => ({
+        ...updateData,
+        // @ts-ignore
+        _id: item._id,
+      }))
+    );
+  }
+
 }
 
 const createModelService = <T extends ObjectApiNames>(
